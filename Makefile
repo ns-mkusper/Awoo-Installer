@@ -55,7 +55,7 @@ ARCH	:=	-march=armv8-a+crc+crypto -mtune=cortex-a57 -mtp=soft -fPIE
 CFLAGS	:=	-g -Wall -O2 -ffunction-sections \
 			$(ARCH) $(DEFINES)
 CFLAGS	+=	 `curl-config --cflags`
-CFLAGS	+=	 `sdl2-config --cflags` `freetype-config --cflags`
+CFLAGS	+=	 `sdl2-config --cflags` `pkgconf --cflags freetype2`
 
 CFLAGS	+=	$(INCLUDE) -D__SWITCH__ -Wall #-Werror -D__DEBUG__ -DNXLINK_DEBUG
 
@@ -67,7 +67,7 @@ LDFLAGS	=	-specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH) -Wl,-Map,$(notdir $*
 
 LIBS	:=  `curl-config --libs` # Networking
 LIBS	+=	-lSDL2_mixer -lopusfile -lopus -lmodplug -lmpg123 -lvorbisidec -logg # Audio
-LIBS	+=	-lpu -lSDL2_gfx -lSDL2_image -lwebp -lpng -ljpeg `sdl2-config --libs` `freetype-config --libs` # Graphics
+LIBS	+=	-lpu -lSDL2_gfx -lSDL2_image -lwebp -lpng -ljpeg `sdl2-config --libs` `pkgconf --cflags freetype2` # Graphics
 LIBS	+=	-lmbedtls -lmbedcrypto -lminizip -lzstd # Memes
 
 #---------------------------------------------------------------------------------
